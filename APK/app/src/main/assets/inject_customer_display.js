@@ -18,7 +18,7 @@
     var nativeOpen = window.open.bind(window);
 
     function hasBridge() {
-        return typeof window.OtiPosBridge !== "undefined" && window.OtiPosBridge && typeof window.OtiPosBridge.push === "function";
+        return typeof window.OtiPosBridge !== "undefined" && window.OtiPosBridge && (typeof window.OtiPosBridge.pushCustomerHtml === "function" || typeof window.OtiPosBridge.push === "function");
     }
 
     window.open = function (url, name, features) {
@@ -49,7 +49,11 @@
                     if (!doc || !doc.documentElement) { return; }
                     var html = doc.documentElement.outerHTML;
                     if (html && html.length > 50) {
-                        window.OtiPosBridge.push(html);
+                        if (typeof window.OtiPosBridge.pushCustomerHtml === "function") {
+                            window.OtiPosBridge.pushCustomerHtml(html);
+                        } else if (typeof window.OtiPosBridge.push === "function") {
+                            window.OtiPosBridge.push(html);
+                        }
                     }
                 } catch (e) {
                     // cross-origin or detached; ignore
