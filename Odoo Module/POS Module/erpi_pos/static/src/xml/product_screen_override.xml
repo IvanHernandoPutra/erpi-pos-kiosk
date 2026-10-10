@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <!-- Override / Extension: ProductScreen -->
+    <t t-name="erpi_pos.ProductScreen" t-inherit="point_of_sale.ProductScreen" t-inherit-mode="extension">
+        <!-- Tambahkan class penanda tema ERPI Touch di container product screen -->
+        <xpath expr="//div[hasclass('product-screen')]" position="attributes">
+            <attribute name="class" add="erpi-touch-screen" separator=" "/>
+        </xpath>
+    </t>
+
+    <!-- Override / Extension: ActionpadWidget (Tombol Bayar & Partner) -->
+    <t t-name="erpi_pos.ActionpadWidget" t-inherit="point_of_sale.ActionpadWidget" t-inherit-mode="extension">
+        <xpath expr="//button[hasclass('pay-order-button')]" position="attributes">
+            <attribute name="class" add="erpi-pay-btn-giant shadow-lg" separator=" "/>
+        </xpath>
+    </t>
+
+</templates>

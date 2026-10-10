@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <!-- Override / Extension: PaymentScreen methods / container -->
+    <t t-name="erpi_pos.PaymentScreenMethods" t-inherit="point_of_sale.PaymentScreenMethods" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('paymentmethods-container')]" position="before">
+            <!-- Tombol Nominal Cepat Kasir (Stitch v2 Fast Tender Strip) -->
+            <div class="erpi-quick-tender-strip mb-2">
+                <div class="quick-tender-label d-flex align-items-center justify-content-between">
+                    <span><i class="fa fa-bolt me-1 text-warning"/> Nominal Cepat Kasir</span>
+                    <small class="text-muted">Touch-First Instant</small>
+                </div>
+                <div class="quick-tender-grid">
+                    <button type="button" class="btn-quick-cash btn-exact" t-on-click="() => this.setQuickCashAmount('exact')">
+                        <small>Uang Pas</small>
+                        <span>PAS</span>
+                    </button>
+                    <button type="button" class="btn-quick-cash" t-on-click="() => this.setQuickCashAmount(50000)">
+                        <small>1 Lembar Biru</small>
+                        <span>50.000</span>
+                    </button>
+                    <button type="button" class="btn-quick-cash" t-on-click="() => this.setQuickCashAmount(100000)">
+                        <small>1 Lembar Merah</small>
+                        <span>100.000</span>
+                    </button>
+                    <button type="button" class="btn-quick-cash btn-qris-fast" t-on-click="() => this.selectQrisPaymentMethod()">
+                        <small>Dinamis</small>
+                        <span>QRIS</span>
+                    </button>
+                </div>
+            </div>
+        </xpath>
+    </t>
+
+    <!-- Override / Extension: PaymentScreenValidate (Giant High Contrast Button) -->
+    <t t-name="erpi_pos.PaymentScreenValidate" t-inherit="point_of_sale.PaymentScreenValidate" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('button') and hasclass('next') and hasclass('validation')]" position="attributes">
+            <attribute name="class" add="erpi-validate-btn-giant shadow-lg" separator=" "/>
+        </xpath>
+    </t>
+
+</templates>

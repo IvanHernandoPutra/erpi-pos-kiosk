@@ -1,0 +1,334 @@
+// ==========================================================================
+// POS ERPI Touch UI - Emerald & Slate Theme (Stitch v2 Specification)
+// Touch-first layout with minimum 56px touch targets, high contrast, clean grid
+// ==========================================================================
+
+$emerald-primary: #059669;
+$emerald-hover: #047857;
+$emerald-light: #10b981;
+$emerald-bg: #ecfdf5;
+$emerald-container: #d1fae5;
+$emerald-text: #064e3b;
+
+$slate-bg: #0f172a;
+$slate-card: #1e293b;
+$slate-surface: #f8fafc;
+$slate-border: #e2e8f0;
+$slate-text-muted: #64748b;
+$slate-text-dark: #0f172a;
+
+// 1. Overall Touch Screen Sizing & Base Styling
+.pos {
+    font-family: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", "Inter", Roboto, sans-serif;
+    background-color: $slate-surface !important;
+    color: $slate-text-dark;
+
+    // Minimum touch target 56px for buttons & interactives
+    .btn, button, .button {
+        min-height: 48px;
+        touch-action: manipulation;
+        border-radius: 8px;
+    }
+
+    // Top Header & Status Bars
+    .pos-topheader, .navbar {
+        background-color: #ffffff !important;
+        border-bottom: 2px solid $slate-border !important;
+        height: 56px !important;
+    }
+
+    // Badge styling
+    .badge-emerald {
+        background-color: $emerald-container;
+        color: $emerald-text;
+        font-weight: 700;
+        border-radius: 9999px;
+        padding: 4px 10px;
+    }
+}
+
+// 2. Product Screen & Grid Overrides
+.product-screen {
+    background-color: #f1f5f9 !important;
+
+    // Left Cart & Numpad Pane
+    .leftpane {
+        background-color: #ffffff !important;
+        border-right: 2px solid $slate-border !important;
+        min-width: 420px;
+
+        .order-container {
+            background-color: #ffffff;
+        }
+
+        .orderline {
+            min-height: 56px;
+            padding: 12px 14px;
+            border-bottom: 1px solid #f1f5f9;
+            transition: background-color 0.15s ease;
+
+            &.selected {
+                background-color: $emerald-bg !important;
+                border-left: 4px solid $emerald-primary;
+            }
+
+            .product-name {
+                font-weight: 700;
+                font-size: 15px;
+                color: $slate-text-dark;
+            }
+
+            .price {
+                font-weight: 800;
+                color: $emerald-primary;
+                font-size: 15px;
+            }
+        }
+
+        // Actionpad & Giant Pay Button
+        .actionpad {
+            .pay-order-button, .pay {
+                background-color: $emerald-primary !important;
+                color: #ffffff !important;
+                min-height: 64px !important;
+                font-size: 18px !important;
+                font-weight: 800 !important;
+                letter-spacing: 0.5px;
+                border: none !important;
+                border-radius: 10px;
+                margin: 4px;
+                box-shadow: 0 4px 6px -1px rgba(5, 150, 105, 0.3), 0 2px 4px -1px rgba(5, 150, 105, 0.2);
+
+                &:hover, &:active {
+                    background-color: $emerald-hover !important;
+                    transform: scale(0.99);
+                }
+            }
+
+            .set-partner {
+                min-height: 52px;
+                font-weight: 600;
+            }
+        }
+
+        // Touch Numpad (Min 56px button height)
+        .numpad {
+            button {
+                min-height: 56px !important;
+                font-size: 20px !important;
+                font-weight: 700 !important;
+                background-color: #ffffff !important;
+                border: 1px solid #e2e8f0 !important;
+                color: $slate-text-dark;
+
+                &:active {
+                    background-color: $emerald-container !important;
+                    color: $emerald-text !important;
+                }
+            }
+        }
+    }
+
+    // Right Product List Catalog Pane
+    .rightpane {
+        background-color: #f8fafc !important;
+
+        .category-list, .categories {
+            padding: 8px;
+            background-color: #ffffff;
+            border-bottom: 1px solid $slate-border;
+
+            .category-button {
+                min-height: 48px;
+                padding: 8px 16px;
+                font-weight: 600;
+                border-radius: 8px;
+                border: 1px solid #e2e8f0;
+                background-color: #f8fafc;
+
+                &.selected {
+                    background-color: $emerald-primary !important;
+                    color: #ffffff !important;
+                    border-color: $emerald-primary !important;
+                }
+            }
+        }
+
+        // Product Cards Grid
+        .product-list {
+            padding: 12px;
+            gap: 12px;
+
+            .product-card, .product {
+                min-height: 140px;
+                border-radius: 12px !important;
+                border: 1px solid #e2e8f0 !important;
+                background: #ffffff !important;
+                box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+                transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+                &:hover {
+                    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+                }
+
+                &:active {
+                    transform: scale(0.97);
+                    border-color: $emerald-primary !important;
+                }
+
+                .product-name {
+                    font-weight: 700 !important;
+                    font-size: 15px !important;
+                    color: $slate-text-dark !important;
+                    line-height: 1.3 !important;
+                }
+
+                .price-tag {
+                    color: $emerald-primary !important;
+                    font-weight: 800 !important;
+                    font-size: 16px !important;
+                }
+            }
+        }
+    }
+}
+
+// 3. Payment Screen Overrides (Touch Quick Cash & High Contrast)
+.payment-screen {
+    background-color: #f8fafc !important;
+
+    .top-content {
+        background-color: #ffffff;
+        border-bottom: 2px solid $slate-border;
+        min-height: 60px;
+
+        .back {
+            min-height: 48px;
+            font-weight: 700;
+            border-radius: 8px;
+        }
+
+        h2 {
+            font-weight: 800;
+            color: $slate-text-dark;
+        }
+    }
+
+    // Payment Methods Selection Strip
+    .paymentmethods {
+        .paymentmethod {
+            min-height: 64px !important;
+            padding: 12px 16px;
+            font-size: 16px;
+            font-weight: 700;
+            background-color: #ffffff;
+            border-bottom: 1px solid $slate-border;
+            transition: all 0.15s ease;
+
+            &.selected, &:active {
+                background-color: $emerald-bg !important;
+                border-left: 5px solid $emerald-primary;
+                color: $emerald-text !important;
+            }
+        }
+    }
+
+    // Quick Cash Strip Container (Stitch v2 Touch Buttons)
+    .erpi-quick-tender-strip {
+        padding: 10px 12px;
+        background-color: #ffffff;
+        border-radius: 12px;
+        margin: 10px 0;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+
+        .quick-tender-label {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: $slate-text-muted;
+            margin-bottom: 8px;
+        }
+
+        .quick-tender-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+
+            .btn-quick-cash {
+                min-height: 56px;
+                border-radius: 10px;
+                border: 1px solid #cbd5e1;
+                background-color: #f8fafc;
+                color: $slate-text-dark;
+                font-weight: 700;
+                font-size: 15px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.15s ease;
+
+                small {
+                    font-size: 10px;
+                    text-transform: uppercase;
+                    color: $slate-text-muted;
+                }
+
+                &:active, &:hover {
+                    background-color: $emerald-container;
+                    border-color: $emerald-primary;
+                    color: $emerald-text;
+                    transform: scale(0.98);
+                }
+
+                &.btn-exact {
+                    background-color: $emerald-bg;
+                    border-color: $emerald-light;
+                    color: $emerald-primary;
+                    font-weight: 800;
+                }
+
+                &.btn-qris-fast {
+                    background-color: #eff6ff;
+                    border-color: #3b82f6;
+                    color: #1d4ed8;
+                    font-weight: 800;
+                }
+            }
+        }
+    }
+
+    // Giant Validate / Bayar Button
+    .validation-button, .button.next.validation {
+        background-color: $emerald-primary !important;
+        color: #ffffff !important;
+        min-height: 72px !important;
+        font-size: 20px !important;
+        font-weight: 800 !important;
+        letter-spacing: 0.5px;
+        border-radius: 12px !important;
+        box-shadow: 0 4px 6px -1px rgba(5, 150, 105, 0.3);
+
+        &.highlight {
+            background-color: $emerald-primary !important;
+            animation: pulse-emerald 2s infinite;
+        }
+
+        &:hover, &:active {
+            background-color: $emerald-hover !important;
+        }
+    }
+}
+
+@keyframes pulse-emerald {
+    0% {
+        box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.5);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(5, 150, 105, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(5, 150, 105, 0);
+    }
+}

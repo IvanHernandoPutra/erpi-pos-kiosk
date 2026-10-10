@@ -1,0 +1,200 @@
+/* CSS Layout Split untuk Layar Pelanggan (Customer Facing Display) */
+
+.erpi-cfd-split-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100vh;
+    background-color: #0b0f19;
+    color: #ffffff;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* SISI KIRI: Daftar Belanja & Total (Lebar 55%) */
+.erpi-cfd-left-pane {
+    flex: 0 0 55%;
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    background: #111827;
+    border-right: 2px solid #1f2937;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.erpi-items-table-header {
+    display: flex;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #374151;
+    font-weight: 700;
+    font-size: 14px;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.col-item { flex: 1; }
+.col-qty { width: 60px; text-align: center; }
+.col-price { width: 120px; text-align: right; }
+
+.erpi-items-scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 8px;
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.erpi-item-row {
+    display: flex;
+    align-items: center;
+    background: #1a2234;
+    border-radius: 8px;
+    padding: 12px 14px;
+    border: 1px solid #28334e;
+}
+
+.erpi-item-row.selected-row {
+    border-color: #10b981;
+    background: #1e2c3f;
+}
+
+.item-main .item-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.item-main .item-discount {
+    font-size: 12px;
+    color: #f59e0b;
+    margin-top: 2px;
+}
+
+.item-main .item-note {
+    font-size: 12px;
+    color: #94a3b8;
+    font-style: italic;
+    margin-top: 2px;
+}
+
+.item-qty {
+    font-size: 15px;
+    font-weight: 700;
+    color: #60a5fa;
+}
+
+.item-subtotal {
+    font-size: 15px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+/* Kotak Total di Bawah */
+.erpi-cfd-summary-box {
+    margin-top: 14px;
+    background: #1a2234;
+    border: 1px solid #28334e;
+    border-radius: 12px;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.summary-line {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #9ca3af;
+}
+
+.summary-line.discount-line {
+    color: #f59e0b;
+    font-weight: 600;
+}
+
+.summary-line.total-highlight {
+    margin-top: 6px;
+    padding-top: 10px;
+    border-top: 1px dashed #4b5563;
+    font-size: 20px;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.summary-line.total-highlight .amount-val {
+    color: #10b981;
+}
+
+/* SISI KANAN: Carousel Banner Promosi (Lebar 45%) */
+.erpi-cfd-right-pane {
+    flex: 0 0 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 32px;
+    background: radial-gradient(circle at center, #1e293b 0%, #0b0f19 100%);
+    box-sizing: border-box;
+}
+
+.erpi-promo-carousel {
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+}
+
+.promo-card {
+    background: #1f2937;
+    border: 1px solid #374151;
+    border-radius: 20px;
+    padding: 40px 28px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.promo-tag {
+    color: #10b981;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.promo-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.3;
+    margin-bottom: 14px;
+}
+
+.promo-desc {
+    font-size: 14px;
+    color: #9ca3af;
+    line-height: 1.6;
+}
+
+.promo-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 24px;
+}
+
+.promo-dots .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #374151;
+}
+
+.promo-dots .dot.active {
+    background: #10b981;
+    width: 24px;
+    border-radius: 5px;
+}
