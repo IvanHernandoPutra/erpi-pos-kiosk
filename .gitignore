@@ -1,0 +1,26 @@
+# Root .gitignore for ERPI POS Kiosk
+
+# Android / Gradle
+.gradle/
+build/
+*/build/
+*.apk
+*.aab
+local.properties
+.cxx/
+*.keystore
+!debug.keystore
+
+# IDE & OS
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+
+# Python / Odoo
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+*.swp
+*~

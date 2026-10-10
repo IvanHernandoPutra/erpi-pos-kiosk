@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+    var resourcesInstalled = false;
+    /**
+     * Receives full document HTML written by Odoo LocalDisplay into the stub iframe.
+     * Mirrors LocalDisplay.update(): install .resources into head once, then swap body.
+     */
+    window.renderCustomer = function (html) {
+        try {
+            var container = document.createElement("div");
+            container.innerHTML = html;
+
+            var posDisplay = container.querySelector(".pos-customer_facing_display");
+            var resources = container.querySelector(".resources");
+
+            if (!posDisplay) {
+                // NoOrder template still carries class; if absent show nothing new
+                if (!resources) { return; }
+            }
+
+            if (resources && (!resourcesInstalled || !document.head.querySelector(".resources"))) {
+                document.head.textContent = "";
+                document.head.appendChild(resources);
+                var fixScript = document.head.querySelector("script#old_browser_fix_auto_scroll");
+                if (fixScript) {
+                    // re-evaluate because appended script blocks do not run
+                    var s = document.createElement("script");
+                    s.textContent = fixScript.textContent;
+                    document.head.appendChild(s);
+                }
+                resourcesInstalled = true;
+            }
+
+            var loading = document.getElementById("oti-loading");
+            if (loading) { loading.remove(); }
+
+            document.body.textContent = "";
+            if (posDisplay) {
+                document.body.appendChild(posDisplay);
+            }
+
+            if (typeof window.fixScrollingIfNecessary === "function") {
+                setTimeout(window.fixScrollingIfNecessary, 0);
+            }
+        } catch (e) {
+            console.error("renderCustomer failed", e);
+        }
+    };
+</script>
+</head>
+<body>
+<div id="oti-loading" style="font-family:sans-serif;color:#888;display:flex;align-items:center;justify-content:center;height:100vh;">Customer display waiting for POS...</div>
+</body>
+</html>

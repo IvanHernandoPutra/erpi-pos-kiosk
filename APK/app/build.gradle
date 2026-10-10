@@ -1,0 +1,86 @@
+plugins {
+    id "com.android.application"
+}
+
+android {
+    namespace "com.oti.posdisplay"
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.oti.posdisplay"
+        minSdk 29
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+    }
+
+    signingConfigs {
+        debug {
+            storeFile rootProject.file("debug.keystore")
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
+    flavorDimensions "server"
+    productFlavors {
+        dev {
+            dimension "server"
+            applicationIdSuffix ".dev"
+            resValue "string", "app_name", "POS OTI Dev"
+            // Laptop Ivan (DHCP, bisa berubah)
+            buildConfigField "String", "POS_URL", "\"http://172.16.1.81:8076\""
+            buildConfigField "String", "APP_TOKEN", "\"36b1fb4d-5c5b-4a1f-95a9-de7bbd6590fd\""
+            buildConfigField "String", "DB_NAME", "\"oti_29jan26\""
+            buildConfigField "String", "ADMIN_EXIT_PIN", "\"996699\""
+            // Koordinat test indoor (dev build saja): fallback saat tak ada fix GPS
+            buildConfigField "double", "TEST_LAT", "-6.99333"
+            buildConfigField "double", "TEST_LON", "110.44529"
+        }
+        staging {
+            dimension "server"
+            applicationIdSuffix ".staging"
+            resValue "string", "app_name", "POS OTI Staging"
+            buildConfigField "String", "POS_URL", "\"https://devoti.erpindonesia.net\""
+            // TODO: ganti setelah oti_pos_security di-install di staging
+            buildConfigField "String", "APP_TOKEN", "\"REPLACE_WITH_STAGING_TOKEN\""
+            buildConfigField "String", "DB_NAME", "\"oti_29jan26\""
+            buildConfigField "String", "ADMIN_EXIT_PIN", "\"REPLACE_WITH_STAGING_PIN\""
+            // Koordinat test indoor (dev build saja): fallback saat tak ada fix GPS
+            buildConfigField "double", "TEST_LAT", "-6.99333"
+            buildConfigField "double", "TEST_LON", "110.44529"
+        }
+        live {
+            dimension "server"
+            resValue "string", "app_name", "POS OTI"
+            buildConfigField "String", "POS_URL", "\"https://REPLACE_LIVE_URL\""
+            buildConfigField "String", "APP_TOKEN", "\"REPLACE_WITH_LIVE_TOKEN\""
+            buildConfigField "String", "DB_NAME", "\"REPLACE_WITH_LIVE_DB\""
+            buildConfigField "String", "ADMIN_EXIT_PIN", "\"REPLACE_WITH_LIVE_PIN\""
+            // Live: nilai placeholder — MainActivity hanya pakai saat BuildConfig.DEBUG (tidak pernah di live)
+            buildConfigField "double", "TEST_LAT", "-6.99333"
+            buildConfigField "double", "TEST_LON", "110.44529"
+        }
+    }
+
+    buildFeatures {
+        buildConfig true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    implementation "androidx.appcompat:appcompat:1.6.1"
+    implementation "androidx.webkit:webkit:1.8.0"
+}
